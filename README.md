@@ -277,4 +277,46 @@ class X implements FooBar {
   bar: string;
 }
 ```
+
+## Conditional Evaluation
+* Use === and !== over == and != (unless the case requires loose type evaluation)
+
+* Use shortcuts
+
+**Bad**
+```
+if ( array.length > 0 ) ...
+if ( array.length === 0 ) ...
+```
+**Good**
+```
+if ( array.length ) ... 
+if ( !array.length ) ...
+```
+**Bad**
+```
+if ( string !== "" ) ...
+if ( string === "" ) ...
+```
+**Good**
+```
+if ( string ) ...
+if ( !string ) ...
+```
+**Bad**
+```
+if ( foo === true ) ...
+if ( foo === false ) ...
+```
+**Good**
+```
+if ( foo ) ...
+if ( !foo ) ...
+```
+*Be careful, the last example will also match: 0, "", null, undefined, NaN. If you _MUST_ test for a boolean false, then use
+```
+ if ( foo === false ) ...
+```
+
+
 * Otherwise use whatever makes you happy that day.
