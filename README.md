@@ -11,7 +11,6 @@ Key Sections:
 * [Single vs. Double Quotes](#quotes)
 * [Tabs vs. Spaces](#spaces)
 * [Use semicolons](#semicolons)
-* [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
 * [`type` vs `interface`](#type-vs-interface)
 * [Type Coersion](#type-coersion)
@@ -168,13 +167,6 @@ enum Color {
 ## Semicolons
 
 * Not use semicolons.
-
-
-## Array
-
-* Annotate arrays as `foos: Foo[]` instead of `foos: Array<Foo>`.
-
-> Reasons: It's easier to read. It's used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
 
 ## Filename
 * Use a pattern```feature-name.type.ts```.
@@ -517,5 +509,9 @@ inbox.filter((msg) => {
   return false
 });
 ```
+
+* Annotate arrays as `foos: Foo[]` instead of `foos: Array<Foo>`.
+
+> Reasons: It's easier to read. It's used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
 
 
