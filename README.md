@@ -14,7 +14,8 @@ Key Sections:
 * [Annotate Arrays as `Type[]`](#array)
 * [File Names](#filename)
 * [`type` vs `interface`](#type-vs-interface)
-* [`null` vs. `undefined`](#null-vs-undefined)
+* [Type Coersion](#type-coersion)
+* [`null` vs. `undefined`](#null-vs-interface)
 * [Conditional Evaluation](#conditional-evaluation)
 
 ## Variable and Function
@@ -198,9 +199,7 @@ class X implements FooBar {
   bar: string;
 }
 ```
-## Type coersion
-* Perform type coercion at the beginning of the statement.
-
+## Type Coersion
 
 * Not use "smart" coercions
 > Reason: next examples should be considered "unnecessarily clever". Prefer the obvious approach of comparing the returned value.
@@ -237,6 +236,44 @@ bool;
 
 bool + "";
 // "false"
+```
+
+* Perform type coercion at the beginning of the statement.
+
+**Bad**
+```
+this.reviewScore = 9;
+const totalScore = new String(this.reviewScore); // typeof totalScore is "object" not "string"
+const totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
+const totalScore = this.reviewScore.toString(); // isn’t guaranteed to return a string
+```
+**Good**
+```
+this.reviewScore = 9;
+const val = String(this.reviewScore);
+```
+**Bad**
+```
+const inputValue = '4';
+const val = new Number(inputValue);
+const val = +inputValue;
+const val = inputValue >> 0;
+const val = parseInt(inputValue);
+```
+**Good**
+```
+const inputValue = '4';
+const val = Number(inputValue);
+```
+**Bad**
+```
+const age = 0;
+const val = new Boolean(age);
+```
+**Good**
+```
+const age = 0;
+const val = Boolean(age);
 ```
 
 ## Null vs. Undefined
@@ -329,5 +366,3 @@ if ( !foo ) ...
  if ( foo === false ) ...
 ```
 
-
-* Otherwise use whatever makes you happy that day.
