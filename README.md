@@ -15,7 +15,7 @@ Key Sections:
 * [File Names](#filename)
 * [`type` vs `interface`](#type-vs-interface)
 * [`null` vs. `undefined`](#null-vs-undefined)
-* [Conditional Evaluation](#conditionals)
+* [Conditional Evaluation](#conditional-evaluation)
 
 ## Variable and Function
 * Use `camelCase` for variable and function names
@@ -173,9 +173,8 @@ enum Color {
 > Reasons: It's easier to read. It's used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect `[]`.
 
 ## Filename
-* Use a pattern```feature.type.ts```.
-* Use dashes to separate words in the descriptive name. 
-* Use dots to separate the descriptive name from the type.
+* Use a pattern```feature-name.type.ts```.
+
 As example: ```primary-button.presets.ts```
 
 ## type vs. interface
@@ -198,6 +197,46 @@ class X implements FooBar {
   foo: string;
   bar: string;
 }
+```
+## Type coersion
+* Perform type coercion at the beginning of the statement.
+
+
+* Not use "smart" coercions
+> Reason: next examples should be considered "unnecessarily clever". Prefer the obvious approach of comparing the returned value.
+
+**Bad**
+```
+let number = 1,
+  string = "1",
+  bool = false;
+
+number;
+// 1
+
+number + "";
+// "1"
+
+string;
+// "1"
+
++string;
+// 1
+
++string++;
+// 1
+
+string;
+// 2
+
+bool;
+// false
+
++bool;
+// 0
+
+bool + "";
+// "false"
 ```
 
 ## Null vs. Undefined
