@@ -2,7 +2,7 @@
 
 Key Sections:
 
-* [Variable](#variable-and-function)
+* [Variable](#variable-and-function-name)
 * [Class](#class)
 * [Interface](#interface)
 * [Type](#type)
@@ -18,7 +18,7 @@ Key Sections:
 * [`null` vs. `undefined`](#null-vs-interface)
 * [Conditional Evaluation](#conditional-evaluation)
 
-## Variable and Function
+## Variable and Function names
 * Use `camelCase` for variable and function names
 
 > Reason: Conventional JavaScript
@@ -54,14 +54,14 @@ class Foo { }
 **Bad**
 ```ts
 class Foo {
-    Bar: number;
+    Bar: number
     Baz() { }
 }
 ```
 **Good**
 ```ts
 class Foo {
-    bar: number;
+    bar: number
     baz() { }
 }
 ```
@@ -154,7 +154,7 @@ enum Color {
 
 ## Quotes
 
-* Use one quote (`''`).
+* Use double quote (`""`).
 
 ## Spaces
 
@@ -189,14 +189,14 @@ type Foo = number | { someProperty: number }
 
 ```
 interface Foo {
-  foo: string;
+  foo: string
 }
 interface FooBar extends Foo {
-  bar: string;
+  bar: string
 }
 class X implements FooBar {
-  foo: string;
-  bar: string;
+  foo: string
+  bar: string
 }
 ```
 ## Type Coersion
@@ -208,33 +208,33 @@ class X implements FooBar {
 ```
 let number = 1,
   string = "1",
-  bool = false;
+  bool = false
 
-number;
+number
 // 1
 
-number + "";
+number + ""
 // "1"
 
-string;
+string
 // "1"
 
-+string;
++string
 // 1
 
-+string++;
++string++
 // 1
 
-string;
+string
 // 2
 
-bool;
+bool
 // false
 
-+bool;
++bool
 // 0
 
-bool + "";
+bool + ""
 // "false"
 ```
 
@@ -242,38 +242,38 @@ bool + "";
 
 **Bad**
 ```
-this.reviewScore = 9;
-const totalScore = new String(this.reviewScore); // typeof totalScore is "object" not "string"
-const totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
-const totalScore = this.reviewScore.toString(); // isn’t guaranteed to return a string
+this.reviewScore = 9
+const totalScore = new String(this.reviewScore) // typeof totalScore is "object" not "string"
+const totalScore = this.reviewScore + '' // invokes this.reviewScore.valueOf()
+const totalScore = this.reviewScore.toString() // isn’t guaranteed to return a string
 ```
 **Good**
 ```
-this.reviewScore = 9;
-const val = String(this.reviewScore);
+this.reviewScore = 9
+const val = String(this.reviewScore)
 ```
 **Bad**
 ```
-const inputValue = '4';
-const val = new Number(inputValue);
-const val = +inputValue;
-const val = inputValue >> 0;
-const val = parseInt(inputValue);
+const inputValue = '4'
+const val = new Number(inputValue)
+const val = +inputValue
+const val = inputValue >> 0
+const val = parseInt(inputValue)
 ```
 **Good**
 ```
-const inputValue = '4';
-const val = Number(inputValue);
+const inputValue = '4'
+const val = Number(inputValue)
 ```
 **Bad**
 ```
-const age = 0;
-const val = new Boolean(age);
+const age = 0
+const val = new Boolean(age)
 ```
 **Good**
 ```
-const age = 0;
-const val = Boolean(age);
+const age = 0
+const val = Boolean(age)
 ```
 
 ## Null vs. Undefined
@@ -284,22 +284,22 @@ const val = Boolean(age);
 
 **Bad**
 ```ts
-let foo = { x: 123, y: undefined };
+let foo = { x: 123, y: undefined }
 ```
 **Good**
 ```ts
-let foo: { x: number, y?: number } = { x:123 };
+let foo: { x: number, y?: number } = { x:123 }
 ```
 
 * Use `undefined` in general (do consider returning an object like `{valid:boolean, value?:Foo}` instead)
 
 **Bad**
 ```ts
-return null;
+return null
 ```
 **Good**
 ```ts
-return undefined;
+return undefined
 ```
 
 * Use `null` where it's a part of the API or conventional
@@ -365,4 +365,154 @@ if ( !foo ) ...
 ```
  if ( foo === false ) ...
 ```
+## References
+
+* Use const for all of your references; avoid using var. 
+> Reason: this ensures that you can’t reassign your references, which can lead to bugs and difficult to comprehend code.
+
+* If you must reassign references, use let instead of var.
+> Reason: let is block-scoped rather than function-scoped like var.
+
+## Objects
+* Use the literal syntax for object creation.
+**Bad**
+```
+const item = new Object()
+```
+**Good**
+```
+const item = {}
+```
+
+*Use property value shorthand
+**Bad**
+```
+const lukeSkywalker = 'Luke Skywalker'
+const obj = {
+  lukeSkywalker: lukeSkywalker,
+}
+```
+**Good**
+```
+const lukeSkywalker = 'Luke Skywalker'
+const obj = {
+  lukeSkywalker
+}
+```
+
+* Group your shorthand properties at the beginning of your object declaration.
+**Bad**
+```
+const lukeSkywalker = 'Luke Skywalker'
+const anakinSkywalker = 'Anakin Skywalker'
+
+const obj = {
+  episodeOne: 1,
+  twoJediWalkIntoACantina: 2,
+  lukeSkywalker,
+  episodeThree: 3,
+  mayTheFourth: 4,
+  anakinSkywalker,
+}
+```
+**Good**
+```
+const lukeSkywalker = 'Luke Skywalker'
+const anakinSkywalker = 'Anakin Skywalker'
+
+const obj = {
+  lukeSkywalker,
+  anakinSkywalker,
+  episodeOne: 1,
+  twoJediWalkIntoACantina: 2,
+  episodeThree: 3,
+  mayTheFourth: 4,
+}
+```
+
+* Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf
+> Reason: these methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
+**Bad**
+```
+console.log(object.hasOwnProperty(key))
+```
+**Good**
+```
+console.log(Object.prototype.hasOwnProperty.call(object, key))
+```
+
+* Prefer the object spread operator over ```Object.assign``` to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
+**Bad**
+```
+const original = { a: 1, b: 2 };
+const copy = Object.assign({}, original, { c: 3 }); // copy => { a: 1, b: 2, c: 3 }
+```
+**Good**
+```
+const original = { a: 1, b: 2 };
+const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
+
+const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
+```
+
+## Arrays
+* Use the literal syntax for array creation
+**Bad**
+```
+const items = new Array()
+```
+**Good**
+```
+const items = []
+```
+
+* Use ``Array#push`` instead of direct assignment to add items to an array
+**Bad**
+```
+const someStack = []
+someStack[someStack.length] = "abracadabra"
+```
+**Good**
+```
+const someStack = []
+someStack.push("abracadabra")
+```
+* Use array spreads ... to copy arrays.
+
+**Good**
+```
+const itemsCopy = [...items]
+```
+
+* To convert an iterable object to an array, use spreads ... instead of Array.from
+**Good**
+```
+const foo = document.querySelectorAll('.foo');
+const nodes = [...foo];
+```
+
+* Use return statements in array method callbacks
+**Bad**
+```
+inbox.filter((msg) => {
+  const { subject, author } = msg
+  if (subject === "Mockingbird") {
+    return author === "Harper Lee"
+  } else {
+    return false
+  }
+});
+```
+**Good**
+```
+inbox.filter((msg) => {
+  const { subject, author } = msg
+  if (subject === "Mockingbird") {
+    return author === "Harper Lee"
+  }
+
+  return false
+});
+```
+
 
