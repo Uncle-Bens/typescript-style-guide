@@ -17,6 +17,9 @@ Key Sections:
 * [Type Coersion](#type-coersion)
 * [`null` vs. `undefined`](#null-vs-interface)
 * [Conditional Evaluation](#conditional-evaluation)
+* [References](#references)
+* [Objects](#objects)
+* [Arrays](#arrays)
 
 ## Variable and Function names
 * Use `camelCase` for variable and function names
