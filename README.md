@@ -2,23 +2,28 @@
 
 Key Sections:
 
-* [Variable](#variable-and-function-name)
+* [File Names](#filename)
+* [Variable and Function names](#variable-and-function-name)
 * [Class](#class)
 * [Interface](#interface)
 * [Type](#type)
+* [`type` vs `interface`](#type-vs-interface)
 * [Namespace](#namespace)
 * [Enum](#enum)
 * [Single vs. Double Quotes](#quotes)
 * [Tabs vs. Spaces](#spaces)
 * [Use semicolons](#semicolons)
-* [File Names](#filename)
-* [`type` vs `interface`](#type-vs-interface)
 * [Type Coersion](#type-coersion)
 * [`null` vs. `undefined`](#null-vs-interface)
 * [Conditional Evaluation](#conditional-evaluation)
-* [References](#references)
+* [Variables](#variables)
 * [Objects](#objects)
 * [Arrays](#arrays)
+
+## Filename
+* Use a pattern```feature-name.type.ts```.
+
+As example: ```primary-button.presets.ts```
 
 ## Variable and Function names
 * Use `camelCase` for variable and function names
@@ -103,6 +108,28 @@ interface Foo {
 > Reason: Similar to class
 
 
+## type vs. interface
+
+* Use `type` when you *might* need a union or intersection:
+
+```
+type Foo = number | { someProperty: number }
+```
+* Use `interface` when you want `extends` or `implements` e.g.
+
+```
+interface Foo {
+  foo: string
+}
+interface FooBar extends Foo {
+  bar: string
+}
+class X implements FooBar {
+  foo: string
+  bar: string
+}
+```
+
 ## Namespace
 
 * Use `PascalCase` for names
@@ -168,32 +195,6 @@ enum Color {
 
 * Not use semicolons.
 
-## Filename
-* Use a pattern```feature-name.type.ts```.
-
-As example: ```primary-button.presets.ts```
-
-## type vs. interface
-
-* Use `type` when you *might* need a union or intersection:
-
-```
-type Foo = number | { someProperty: number }
-```
-* Use `interface` when you want `extends` or `implements` e.g.
-
-```
-interface Foo {
-  foo: string
-}
-interface FooBar extends Foo {
-  bar: string
-}
-class X implements FooBar {
-  foo: string
-  bar: string
-}
-```
 ## Type Coersion
 
 * Not use "smart" coercions
@@ -300,6 +301,15 @@ return undefined
 * Use `null` where it's a part of the API or conventional
 
 ## Conditional Evaluation
+* Conditional statements such as the if statement evaluate their expression using coercion with the ToBoolean abstract method and always follow these simple rules:
+
+Objects evaluate to true
+Undefined evaluates to false
+Null evaluates to false
+Booleans evaluate to the value of the boolean
+Numbers evaluate to false if +0, -0, or NaN, otherwise true
+Strings evaluate to false if an empty string '', otherwise true
+
 * Use `===` and `!==` over `==` and `!=` (unless the case requires loose type evaluation)
 
 * Use `== null` / `!= null` (not `===` / `!==`) to check for `null` / `undefined` on primitives as it works for both `null`/`undefined` but not other falsy values (like `''`, `0`, `false`) e.g.
@@ -324,49 +334,121 @@ if (error === null)...
 if (error)...
 ```
 
-* Use shortcuts
+* Use shortcuts for booleans, but explicit comparisons for strings and numbers.
 
 **Bad**
 ```
-if ( array.length > 0 ) ...
-if ( array.length === 0 ) ...
+if (isValid === true) ...
 ```
 **Good**
 ```
-if ( array.length ) ... 
-if ( !array.length ) ...
+if (isValid) ...
 ```
 **Bad**
 ```
-if ( string !== "" ) ...
-if ( string === "" ) ...
+if (name) ...
 ```
 **Good**
 ```
-if ( string ) ...
-if ( !string ) ...
+if (name !== "") ...
 ```
 **Bad**
 ```
-if ( foo === true ) ...
-if ( foo === false ) ...
+if (collection.length) ...
 ```
 **Good**
 ```
-if ( foo ) ...
-if ( !foo ) ...
+if (collection.length > 0) ...
 ```
-*Be careful, the last example will also match: 0, "", null, undefined, NaN. If you _MUST_ test for a boolean false, then use
-```
- if ( foo === false ) ...
-```
-## References
 
-* Use const for all of your references; avoid using var. 
+* Ternaries should not be nested and generally be single line expressions.
+
+**Bad**
+```
+const foo = maybe1 > maybe2
+  ? "bar"
+  : value1 > value2 ? "baz" : null
+```
+**Good**
+```
+const maybeNull = value1 > value2 ? "baz" : null
+const foo = maybe1 > maybe2
+  ? "bar"
+  : maybeNull
+```
+
+* When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: +, -, and ** since their precedence is broadly understood. We recommend enclosing / and * in parentheses because their precedence can be ambiguous when they are mixed
+> Reason: This improves readability and clarifies the developer’s intention.
+**Bad**
+```
+const foo = a && b < 0 || c > 0 || d + 1 === 0;
+```
+**Good**
+```
+const foo = (a && b < 0) || c > 0 || (d + 1 === 0);
+```
+
+* In case your control statement (if, while etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
+> Reason: requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
+**Bad**
+```
+if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
+  thing1();
+}
+```
+**Good**
+```
+if (
+  (foo === 123 || bar === 'abc')
+  && doesItLookGoodWhenItBecomesThatLong()
+  && isThisReallyHappening()
+) {
+  thing1();
+}
+```
+
+## Variables
+* Always use const or let to declare variables. 
+> Reason: not doing so will result in global variables. We want to avoid polluting the global namespace.
+ 
+* Use const for all of your references. 
 > Reason: this ensures that you can’t reassign your references, which can lead to bugs and difficult to comprehend code.
 
 * If you must reassign references, use let instead of var.
 > Reason: let is block-scoped rather than function-scoped like var.
+
+* Use one const or let declaration per variable or assignment.
+**Bad**
+```
+const items = getItems(),
+    goSportsTeam = true,
+    dragonball = 'z'
+```
+**Good**
+```
+const items = getItems()
+const goSportsTeam = true
+const dragonball = 'z'
+```
+
+* Don’t chain variable assignments
+**Bad**
+```
+let a = b = c = 1
+```
+
+* Avoid using unary increments and decrements (++, --)
+
+* Avoid linebreaks before or after = in an assignment. If your assignment violates max-len, surround the value in parens.
+**Bad**
+```
+const foo
+  = "superLongLongLongLongLongLongLongLongString"
+```
+**Good**
+```
+const foo = "superLongLongLongLongLongLongLongLongString"
+```
 
 ## Objects
 * Use the literal syntax for object creation.
