@@ -379,7 +379,7 @@ const item = new Object()
 const item = {}
 ```
 
-*Use property value shorthand
+* Use property value shorthand
 **Bad**
 ```
 const lukeSkywalker = 'Luke Skywalker'
