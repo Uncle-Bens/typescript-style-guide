@@ -1,4 +1,4 @@
-# TypeScript Style Guide and Coding Conventions in DGT
+# TypeScript Style Guide and Coding Conventions
 
 Key Sections:
 
