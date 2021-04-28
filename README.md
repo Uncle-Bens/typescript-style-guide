@@ -764,7 +764,8 @@ function foo() {
 
 **Good**
 ```ts
-const foo = function bar() {
+const short = function longUniqueMoreDescriptiveLexicalFoo() {
+  // ...
 };
 ```
 
