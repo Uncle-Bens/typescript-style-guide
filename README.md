@@ -636,7 +636,7 @@ const arr = [1, 2, 3, 4];
 const first = arr[0];
 const second = arr[1];
 ```
-**Bad**
+**Good**
 ```ts
 const [first, second] = arr;
 ```
@@ -645,24 +645,24 @@ Use object destructuring for multiple return values, not array destructuring. js
 (http://jscs.info/rule/disallowArrayDestructuringReturn)
 
     > Why? You can add new properties over time or change the order of things without breaking call sites.
+**Bad**
+```ts
+function processInput(input) {
+  // then a miracle occurs
+  return [left, right, top, bottom];
+}
 
-    ```ts
-    // bad
-    function processInput(input) {
-      // then a miracle occurs
-      return [left, right, top, bottom];
-    }
+// the caller needs to think about the order of return data
+const [left, __, top] = processInput(input);
+```
+**Good**
+```ts
+function processInput(input) {
+  // then a miracle occurs
+  return { left, right, top, bottom };
+}
 
-    // the caller needs to think about the order of return data
-    const [left, __, top] = processInput(input);
-
-    // good
-    function processInput(input) {
-      // then a miracle occurs
-      return { left, right, top, bottom };
-    }
-
-    // the caller selects only the data they need
-    const { left, top } = processInput(input);
-    ```ts
+// the caller selects only the data they need
+const { left, top } = processInput(input);
+```ts
 
