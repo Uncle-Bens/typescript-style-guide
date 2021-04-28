@@ -20,6 +20,9 @@ Key Sections:
 * [Objects](#objects)
 * [Arrays](#arrays)
 * [Destructuring](#destructuring)
+* [Strings](#strings)
+* [Functions](#functions)
+* [Arrow Functions](#arrow-functions)
 
 ## Filename
 * Use a pattern```feature-name.type.ts```.
@@ -740,7 +743,7 @@ const foo = '\'this\' \i\s \"quoted\"';
 // good
 const foo = '\'this\' is "quoted"';
 const foo = `'this' is "quoted"`;
-    ```
+```
 
 ## Functions
 
@@ -966,7 +969,7 @@ new (Function.prototype.bind.apply(Date, [null, 2016, 08, 05]));
 
 // good
 new Date(...[2016, 08, 05]);
-    ```
+```
 ## Arrow Functions
 
 When you must use function expressions (as when passing an anonymous function), use arrow function notation. eslint: [`prefer-arrow-callback`](http://eslint.org/docs/rules/prefer-arrow-callback.html), [`arrow-spacing`](http://eslint.org/docs/rules/arrow-spacing.html) jscs: [`requireArrowFunctions`](http://jscs.info/rule/requireArrowFunctions)
