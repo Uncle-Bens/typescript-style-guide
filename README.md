@@ -116,12 +116,12 @@ interface Foo {
 
 * Use `type` when you *might* need a union or intersection:
 
-```
+```ts
 type Foo = number | { someProperty: number }
 ```
 * Use `interface` when you want `extends` or `implements` e.g.
 
-```
+```ts
 interface Foo {
   foo: string
 }
@@ -205,7 +205,7 @@ enum Color {
 > Reason: next examples should be considered "unnecessarily clever". Prefer the obvious approach of comparing the returned value.
 
 **Bad**
-```
+```ts
 let number = 1,
   string = "1",
   bool = false
@@ -241,19 +241,19 @@ bool + ""
 * Perform type coercion at the beginning of the statement.
 
 **Bad**
-```
+```ts
 this.reviewScore = 9
 const totalScore = new String(this.reviewScore) // typeof totalScore is "object" not "string"
 const totalScore = this.reviewScore + '' // invokes this.reviewScore.valueOf()
 const totalScore = this.reviewScore.toString() // isn’t guaranteed to return a string
 ```
 **Good**
-```
+```ts
 this.reviewScore = 9
 const val = String(this.reviewScore)
 ```
 **Bad**
-```
+```ts
 const inputValue = '4'
 const val = new Number(inputValue)
 const val = +inputValue
@@ -261,17 +261,17 @@ const val = inputValue >> 0
 const val = parseInt(inputValue)
 ```
 **Good**
-```
+```ts
 const inputValue = '4'
 const val = Number(inputValue)
 ```
 **Bad**
-```
+```ts
 const age = 0
 const val = new Boolean(age)
 ```
 **Good**
-```
+```ts
 const age = 0
 const val = Boolean(age)
 ```
