@@ -671,7 +671,7 @@ const { left, top } = processInput(input);
 
 ## Strings
 
-Use double quotes `""` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
+Use double quotes `""` for strings.
 
 **Bad**
 ```ts
