@@ -734,20 +734,6 @@ function sayHi(name) {
 
 Never use `eval()` on a string, it opens too many vulnerabilities.
 
-Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](http://eslint.org/docs/rules/no-useless-escape)
-
-> Why? Backslashes harm readability, thus they should only be present when necessary.
-
-**Bad**
-```ts
-const foo = '\'this\' \i\s \"quoted\"';
-```
-
-**Good**
-```ts
-const foo = '\'this\' is "quoted"';
-const foo = `'this' is "quoted"`;
-```
 
 ## Functions
 
