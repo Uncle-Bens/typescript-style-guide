@@ -664,5 +664,5 @@ function processInput(input) {
 
 // the caller selects only the data they need
 const { left, top } = processInput(input);
-```ts
+```
 
