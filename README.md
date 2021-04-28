@@ -600,10 +600,10 @@ inbox.filter((msg) => {
 
 ## Destructuring
 
-  Use object destructuring when accessing and using multiple properties of an object. jscs: [`requireObjectDestructuring`
-  (http://jscs.info/rule/requireObjectDestructuring)
+Use object destructuring when accessing and using multiple properties of an object. jscs: [`requireObjectDestructuring`
+(http://jscs.info/rule/requireObjectDestructuring)
 
-    > Why? Destructuring saves you from creating temporary references for those properties.
+> Why? Destructuring saves you from creating temporary references for those properties.
 
 **Bad**
 ```ts
@@ -627,21 +627,22 @@ function getFullName({ firstName, lastName }) {
 }
 ```
 
-  Use array destructuring. jscs: [`requireArrayDestructuring`](http://jscs.info/rule/requireArrayDestructuring)
+Use array destructuring. jscs: [`requireArrayDestructuring`](http://jscs.info/rule/requireArrayDestructuring)
 
-    ```ts
-    const arr = [1, 2, 3, 4];
+**Bad**
+```ts
+const arr = [1, 2, 3, 4];
 
-    // bad
-    const first = arr[0];
-    const second = arr[1];
+const first = arr[0];
+const second = arr[1];
+```
+**Bad**
+```ts
+const [first, second] = arr;
+```
 
-    // good
-    const [first, second] = arr;
-    ```
-
-  Use object destructuring for multiple return values, not array destructuring. jscs: [`disallowArrayDestructuringReturn`
-  (http://jscs.info/rule/disallowArrayDestructuringReturn)
+Use object destructuring for multiple return values, not array destructuring. jscs: [`disallowArrayDestructuringReturn`
+(http://jscs.info/rule/disallowArrayDestructuringReturn)
 
     > Why? You can add new properties over time or change the order of things without breaking call sites.
 
