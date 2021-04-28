@@ -685,7 +685,7 @@ const name = "Capt. Janeway";
 
 Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
 
-Why? Broken strings are painful to work with and make code less searchable.
+> Why? Broken strings are painful to work with and make code less searchable.
 
 **Bad**
 ```ts
