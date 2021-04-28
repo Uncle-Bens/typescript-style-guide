@@ -338,40 +338,40 @@ if (error)...
 * Use shortcuts for booleans, but explicit comparisons for strings and numbers.
 
 **Bad**
-```
+```ts
 if (isValid === true) ...
 ```
 **Good**
-```
+```ts
 if (isValid) ...
 ```
 **Bad**
-```
+```ts
 if (name) ...
 ```
 **Good**
-```
+```ts
 if (name !== "") ...
 ```
 **Bad**
-```
+```ts
 if (collection.length) ...
 ```
 **Good**
-```
+```ts
 if (collection.length > 0) ...
 ```
 
 * Ternaries should not be nested and generally be single line expressions.
 
 **Bad**
-```
+```ts
 const foo = maybe1 > maybe2
   ? "bar"
   : value1 > value2 ? "baz" : null
 ```
 **Good**
-```
+```ts
 const maybeNull = value1 > value2 ? "baz" : null
 const foo = maybe1 > maybe2
   ? "bar"
@@ -381,24 +381,24 @@ const foo = maybe1 > maybe2
 * When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: +, -, and ** since their precedence is broadly understood. We recommend enclosing / and * in parentheses because their precedence can be ambiguous when they are mixed
 > Reason: This improves readability and clarifies the developer’s intention.
 **Bad**
-```
+```ts
 const foo = a && b < 0 || c > 0 || d + 1 === 0;
 ```
 **Good**
-```
+```ts
 const foo = (a && b < 0) || c > 0 || (d + 1 === 0);
 ```
 
 * In case your control statement (if, while etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
 > Reason: requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
 **Bad**
-```
+```ts
 if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
   thing1();
 }
 ```
 **Good**
-```
+```ts
 if (
   (foo === 123 || bar === 'abc')
   && doesItLookGoodWhenItBecomesThatLong()
@@ -420,13 +420,13 @@ if (
 
 * Use one const or let declaration per variable or assignment.
 **Bad**
-```
+```ts
 const items = getItems(),
     goSportsTeam = true,
     dragonball = 'z'
 ```
 **Good**
-```
+```ts
 const items = getItems()
 const goSportsTeam = true
 const dragonball = 'z'
@@ -434,7 +434,7 @@ const dragonball = 'z'
 
 * Don’t chain variable assignments
 **Bad**
-```
+```ts
 let a = b = c = 1
 ```
 
@@ -442,36 +442,36 @@ let a = b = c = 1
 
 * Avoid linebreaks before or after = in an assignment. If your assignment violates max-len, surround the value in parens.
 **Bad**
-```
+```ts
 const foo
   = "superLongLongLongLongLongLongLongLongString"
 ```
 **Good**
-```
+```ts
 const foo = "superLongLongLongLongLongLongLongLongString"
 ```
 
 ## Objects
 * Use the literal syntax for object creation.
 **Bad**
-```
+```ts
 const item = new Object()
 ```
 **Good**
-```
+```ts
 const item = {}
 ```
 
 * Use property value shorthand
 **Bad**
-```
+```ts
 const lukeSkywalker = 'Luke Skywalker'
 const obj = {
   lukeSkywalker: lukeSkywalker,
 }
 ```
 **Good**
-```
+```ts
 const lukeSkywalker = 'Luke Skywalker'
 const obj = {
   lukeSkywalker
@@ -480,7 +480,7 @@ const obj = {
 
 * Group your shorthand properties at the beginning of your object declaration.
 **Bad**
-```
+```ts
 const lukeSkywalker = 'Luke Skywalker'
 const anakinSkywalker = 'Anakin Skywalker'
 
@@ -494,7 +494,7 @@ const obj = {
 }
 ```
 **Good**
-```
+```ts
 const lukeSkywalker = 'Luke Skywalker'
 const anakinSkywalker = 'Anakin Skywalker'
 
@@ -511,11 +511,11 @@ const obj = {
 * Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf
 > Reason: these methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
 **Bad**
-```
+```ts
 console.log(object.hasOwnProperty(key))
 ```
 **Good**
-```
+```ts
 console.log(Object.prototype.hasOwnProperty.call(object, key))
 ```
 
@@ -662,5 +662,5 @@ inbox.filter((msg) => {
 
     // the caller selects only the data they need
     const { left, top } = processInput(input);
-    ```
+    ```ts
 
