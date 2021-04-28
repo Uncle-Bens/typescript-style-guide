@@ -521,12 +521,12 @@ console.log(Object.prototype.hasOwnProperty.call(object, key))
 
 * Prefer the object spread operator over ```Object.assign``` to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
 **Bad**
-```
+```ts
 const original = { a: 1, b: 2 };
 const copy = Object.assign({}, original, { c: 3 }); // copy => { a: 1, b: 2, c: 3 }
 ```
 **Good**
-```
+```ts
 const original = { a: 1, b: 2 };
 const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 
@@ -536,42 +536,42 @@ const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 ## Arrays
 * Use the literal syntax for array creation
 **Bad**
-```
+```ts
 const items = new Array()
 ```
 **Good**
-```
+```ts
 const items = []
 ```
 
 * Use ``Array#push`` instead of direct assignment to add items to an array
 **Bad**
-```
+```ts
 const someStack = []
 someStack[someStack.length] = "abracadabra"
 ```
 **Good**
-```
+```ts
 const someStack = []
 someStack.push("abracadabra")
 ```
 * Use array spreads ... to copy arrays.
 
 **Good**
-```
+```ts
 const itemsCopy = [...items]
 ```
 
 * To convert an iterable object to an array, use spreads ... instead of Array.from
 **Good**
-```
+```ts
 const foo = document.querySelectorAll('.foo');
 const nodes = [...foo];
 ```
 
 * Use return statements in array method callbacks
 **Bad**
-```
+```ts
 inbox.filter((msg) => {
   const { subject, author } = msg
   if (subject === "Mockingbird") {
@@ -582,7 +582,7 @@ inbox.filter((msg) => {
 });
 ```
 **Good**
-```
+```ts
 inbox.filter((msg) => {
   const { subject, author } = msg
   if (subject === "Mockingbird") {
@@ -605,7 +605,7 @@ inbox.filter((msg) => {
 
     > Why? Destructuring saves you from creating temporary references for those properties.
 
-    ```javascript
+    ```ts
     // bad
     function getFullName(user) {
       const firstName = user.firstName;
@@ -628,7 +628,7 @@ inbox.filter((msg) => {
 
   Use array destructuring. jscs: [`requireArrayDestructuring`](http://jscs.info/rule/requireArrayDestructuring)
 
-    ```javascript
+    ```ts
     const arr = [1, 2, 3, 4];
 
     // bad
@@ -644,7 +644,7 @@ inbox.filter((msg) => {
 
     > Why? You can add new properties over time or change the order of things without breaking call sites.
 
-    ```javascript
+    ```ts
     // bad
     function processInput(input) {
       // then a miracle occurs
