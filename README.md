@@ -513,6 +513,8 @@ const obj = {
 
 * Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf
 > Reason: these methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
+
+
 **Bad**
 ```ts
 console.log(object.hasOwnProperty(key))
