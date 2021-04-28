@@ -605,26 +605,27 @@ inbox.filter((msg) => {
 
     > Why? Destructuring saves you from creating temporary references for those properties.
 
-    ```ts
-    // bad
-    function getFullName(user) {
-      const firstName = user.firstName;
-      const lastName = user.lastName;
+**Bad**
+```ts
+function getFullName(user) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
 
-      return `${firstName} ${lastName}`;
-    }
+  return `${firstName} ${lastName}`;
+}
+```
 
-    // good
-    function getFullName(user) {
-      const { firstName, lastName } = user;
-      return `${firstName} ${lastName}`;
-    }
+**Good**
+```ts
+function getFullName(user) {
+  const { firstName, lastName } = user;
+  return `${firstName} ${lastName}`;
+}
 
-    // best
-    function getFullName({ firstName, lastName }) {
-      return `${firstName} ${lastName}`;
-    }
-    ```
+function getFullName({ firstName, lastName }) {
+  return `${firstName} ${lastName}`;
+}
+```
 
   Use array destructuring. jscs: [`requireArrayDestructuring`](http://jscs.info/rule/requireArrayDestructuring)
 
