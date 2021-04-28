@@ -671,20 +671,16 @@ const { left, top } = processInput(input);
 
 ## Strings
 
-Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
+Use double quotes `""` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
 
 **Bad**
 ```ts
-// bad
-const name = "Capt. Janeway";
-
-// bad - template literals should contain interpolation or newlines
+//template literals should contain interpolation or newlines
 const name = `Capt. Janeway`;
 ```
 **Good**
 ```ts
-// good
-const name = 'Capt. Janeway';
+const name = "Capt. Janeway";
 ```
 
 Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
@@ -693,19 +689,19 @@ Why? Broken strings are painful to work with and make code less searchable.
 
 **Bad**
 ```ts
-const errorMessage = 'This is a super long error that was thrown because \
+const errorMessage = "This is a super long error that was thrown because \
 of Batman. When you stop to think about how Batman had anything to do \
 with this, you would get nowhere \
-fast.';
+fast.";
 
-const errorMessage = 'This is a super long error that was thrown because ' +
+const errorMessage = "This is a super long error that was thrown because ' +
   'of Batman. When you stop to think about how Batman had anything to do ' +
-  'with this, you would get nowhere fast.';
+  'with this, you would get nowhere fast.";
 ```
 
 **Good**
 ```ts
-const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+const errorMessage = "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.";
 ```
 
 When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](http://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing) jscs: [`requireTemplateStrings`](http://jscs.info/rule/requireTemplateStrings)
@@ -715,11 +711,11 @@ When programmatically building up strings, use template strings instead of conca
 **Bad**
 ```ts
 function sayHi(name) {
-  return 'How are you, ' + name + '?';
+  return "How are you, " + name + "?";
 }
 
 function sayHi(name) {
-  return ['How are you, ', name, '?'].join();
+  return ["How are you, ", name, "?"].join();
 }
 
 function sayHi(name) {
