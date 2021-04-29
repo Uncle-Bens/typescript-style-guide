@@ -291,18 +291,7 @@ let foo = { x: 123, y: undefined }
 let foo: { x: number, y?: number } = { x:123 }
 ```
 
-* Use `undefined` in general (do consider returning an object like `{valid:boolean, value?:Foo}` instead)
-
-**Bad**
-```ts
-return null
-```
-**Good**
-```ts
-return undefined
-```
-
-* Use `null` where it's a part of the API or conventional
+* Use `null` in general (do consider returning an object like `{valid:boolean, value?:Foo}` instead)
 
 ## Conditional Evaluation
 * Conditional statements such as the if statement evaluate their expression using coercion with the ToBoolean abstract method and always follow these simple rules:
